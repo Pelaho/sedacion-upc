@@ -581,7 +581,7 @@ table.et td:first-child{text-align:left;padding-left:6px;font-size:10px;color:va
           <div class="cam-crit-block" id="block0">
             <div class="cam-crit-header" onclick="expandCrit(0)">
               <div style="display:flex;align-items:center;gap:10px;">
-                <div class="cam-cb on" id="cb0">✓</div>
+                <div class="cam-cb" id="cb0"></div>
                 <div>
                   <div style="font-size:13px;font-weight:600;color:var(--text);">Criterio 1 — Inicio agudo o fluctuante</div>
                   <div style="font-size:11px;color:var(--text-muted);margin-top:1px;">Toca para ver preguntas</div>
@@ -738,7 +738,7 @@ table.et td:first-child{text-align:left;padding-left:6px;font-size:10px;color:va
           </div>
 
           <div class="cam-result cam-pend" id="cam-result">Evalúa los criterios para obtener resultado</div>
-          <div style="font-size:11px;color:var(--text-muted);margin-top:6px;text-align:center;line-height:1.4;">Delirium confirmado: Criterios 1 + 2 + (3 ó 4) positivos · Evaluar c/6h</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:6px;text-align:center;line-height:1.4;">Delirium confirmado: Criterios 1 + 2 positivos · Evaluar c/6h</div>
         </div>
       </div>
     </div>
@@ -1077,7 +1077,7 @@ function calc(){
           <span class="rcard-row-val">${totalStr} <span class="rcard-row-u">${unitBase}</span></span>
         </div>
         <div class="rcard-row-item rcard-row-ml">
-          <span class="rcard-row-lbl">Bomba</span>
+          <span class="rcard-row-lbl">Vel. Infusión</span>
           <span class="rcard-row-val rcard-ml-val">${mlStr} <span class="rcard-row-u">mL/hr</span></span>
         </div>
         <div class="rcard-row-dil">${ci.dilDesc}</div>
@@ -1346,7 +1346,7 @@ function toggleDil(id, btn){
 }
 
 // ===== CAM-ICU EXPANDIBLE =====
-const camS=[true,false,false,false];
+const camS=[false,false,false,false];
 const camExpanded=[false,false,false,false];
 
 function expandCrit(i){
@@ -1368,7 +1368,7 @@ function setCam(i,val){
 function updateCamResult(){
   const r=document.getElementById('cam-result');
   const allEval=camS.some(v=>v);
-  if(camS[0]&&camS[1]&&(camS[2]||camS[3])){
+  if(camS[0]&&camS[1]){
     r.className='cam-result cam-pos';
     r.textContent='⚠ CAM-ICU POSITIVO — Delirium presente. Iniciar manejo.';
   } else if(!camS[0]&&!camS[1]&&!camS[2]&&!camS[3]){
