@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>Sedación UPC — H. Félix Bulnes</title>
+<meta name="description" content="Protocolo de sedación, analgesia y manejo del delirium en paciente crítico adulto. Hospital Félix Bulnes, Nov 2025."/>
+<meta name="theme-color" content="#0C3D6E"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="Sedación UPC"/>
+<link rel="manifest" href="manifest.json"/>
+<link rel="apple-touch-icon" href="icon-192.png"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --blue:#1A5FA8;--blue-light:#E8F1FB;--blue-mid:#B5D0F0;--blue-dark:#0C3D6E;
+  --red:#C0392B;--red-light:#FDECEA;
+  --amber:#B7701A;--amber-light:#FDF3E3;
+  --green:#2E7D32;--green-light:#EDF7EE;
+  --gray:#5F6368;--gray-light:#F5F6F7;--gray-border:#E1E4E8;
+  --white:#FFFFFF;--text:#1A1D23;--text-muted:#6B7280;
+  --radius:10px;--radius-sm:6px;
+  --font:'IBM Plex Sans',sans-serif;--mono:'IBM Plex Mono',monospace;
+  --shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;background:#EEF2F7;font-family:var(--font);color:var(--text);font-size:15px;}
+#shell{max-width:480px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;background:var(--white);box-shadow:0 0 40px rgba(0,0,0,.12);}
+
+/* TOPBAR */
+.topbar{background:var(--blue-dark);padding:14px 16px 12px;flex-shrink:0;}
+.topbar h1{font-size:15px;font-weight:600;color:#fff;letter-spacing:.2px;}
+.topbar p{font-size:11px;color:var(--blue-mid);margin-top:2px;font-family:var(--mono);}
+
+/* TABS */
+.tabbar{display:flex;background:var(--white);border-bottom:1.5px solid var(--gray-border);overflow-x:auto;flex-shrink:0;scrollbar-width:none;}
+.tabbar::-webkit-scrollbar{display:none;}
+.tabbar-btn{flex:0 0 auto;padding:11px 14px;font-size:12px;font-weight:500;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;user-select:none;font-family:var(--font);}
+.tabbar-btn.on{color:var(--blue);border-bottom:2px solid var(--blue);font-weight:600;}
+
+/* CONTENT */
+.pages{flex:1;overflow-y:auto;}
+.page{display:none;padding:14px;flex-direction:column;gap:12px;}
+.page.on{display:flex;}
+
+/* CARD */
+.card{background:var(--white);border:1px solid var(--gray-border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
+.card-hd{padding:9px 13px;background:var(--gray-light);border-bottom:1px solid var(--gray-border);font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.6px;font-family:var(--mono);}
+.card-bd{padding:12px 13px;}
+
+/* INFO ROWS */
+.irow{display:flex;justify-content:space-between;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--gray-border);}
+.irow:last-child{border-bottom:none;}
+.ilbl{font-size:12px;color:var(--text-muted);flex:0 0 115px;padding-right:8px;}
+.ival{font-size:12px;color:var(--text);text-align:right;flex:1;line-height:1.4;}
+
+/* BADGES */
+.badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600;font-family:var(--mono);}
+.b-blue{background:var(--blue-light);color:var(--blue-dark);}
+.b-red{background:var(--red-light);color:var(--red);}
+.b-amber{background:var(--amber-light);color:var(--amber);}
+.b-green{background:var(--green-light);color:var(--green);}
+.b-gray{background:var(--gray-light);color:var(--gray);}
+
+/* ALERT */
+.alert{border-radius:var(--radius-sm);padding:10px 12px;font-size:12px;line-height:1.5;}
+.alert-amber{background:var(--amber-light);border-left:3px solid var(--amber);color:#7A4A10;border-radius:0 var(--radius-sm) var(--radius-sm) 0;}
+.alert-red{background:var(--red-light);border-left:3px solid var(--red);color:var(--red);border-radius:0 var(--radius-sm) var(--radius-sm) 0;}
+.alert-blue{background:var(--blue-light);border-left:3px solid var(--blue);color:var(--blue-dark);border-radius:0 var(--radius-sm) var(--radius-sm) 0;}
+.alert-green{background:var(--green-light);border-left:3px solid var(--green);color:var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;}
+
+/* SAS ROWS */
+.srow{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--gray-border);}
+.srow:last-child{border-bottom:none;}
+.snum{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0;font-family:var(--mono);}
+.sterm{font-size:13px;font-weight:500;}
+.sdesc{font-size:11px;color:var(--text-muted);margin-top:2px;line-height:1.4;}
+
+/* PILL ROW */
+.pill-row{display:flex;gap:6px;flex-wrap:wrap;}
+.pill{font-size:11px;padding:4px 11px;border-radius:20px;cursor:pointer;user-select:none;font-weight:500;font-family:var(--mono);}
+.pill.on{background:var(--blue);color:#fff;}
+.pill.off{background:var(--gray-light);color:var(--text-muted);border:1px solid var(--gray-border);}
+
+/* CALCULADORA */
+.input-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.input-row label{font-size:13px;color:var(--text-muted);flex:0 0 65px;}
+.input-row input[type=number]{flex:1;height:40px;padding:0 12px;border:1.5px solid var(--gray-border);border-radius:var(--radius-sm);font-size:16px;font-weight:600;text-align:center;background:var(--gray-light);color:var(--text);font-family:var(--mono);}
+.slider-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
+.slider-label span{font-size:12px;color:var(--text-muted);}
+.slider-label strong{font-size:20px;font-weight:600;color:var(--blue);font-family:var(--mono);}
+input[type=range]{width:100%;height:6px;border-radius:3px;appearance:none;background:linear-gradient(to right,var(--blue) 0%,var(--blue) var(--pct,25%),var(--gray-border) var(--pct,25%));margin:8px 0;}
+input[type=range]::-webkit-slider-thumb{appearance:none;width:20px;height:20px;border-radius:50%;background:var(--blue);border:3px solid var(--white);box-shadow:0 0 0 1.5px var(--blue);}
+.result-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px;}
+.rcard{background:var(--blue-light);border-radius:var(--radius-sm);padding:10px 12px;}
+.rcard-drug{font-size:10px;color:var(--blue-dark);font-weight:600;font-family:var(--mono);margin-bottom:2px;}
+.rcard-dose{font-size:20px;font-weight:700;color:var(--blue);font-family:var(--mono);line-height:1.1;}
+.rcard-unit{font-size:10px;color:var(--blue-dark);margin-bottom:6px;}
+.rcard-rows{display:flex;flex-direction:column;gap:3px;border-top:0.5px solid var(--blue-mid);padding-top:6px;margin-top:2px;}
+.rcard-row-item{display:flex;justify-content:space-between;align-items:center;}
+.rcard-row-lbl{font-size:10px;color:var(--blue-dark);font-weight:600;font-family:var(--mono);}
+.rcard-row-val{font-size:12px;font-weight:600;color:var(--blue-dark);font-family:var(--mono);}
+.rcard-row-u{font-size:10px;font-weight:400;}
+.rcard-row-ml{background:var(--blue-dark);border-radius:4px;padding:4px 6px;margin-top:2px;}
+.rcard-row-ml .rcard-row-lbl{color:#B5D0F0;}
+.rcard-ml-val{font-size:14px;font-weight:700;color:#fff !important;}
+.rcard-ml-val .rcard-row-u{color:#B5D0F0;}
+.rcard-row-dil{font-size:9px;color:var(--blue-dark);opacity:.7;margin-top:2px;line-height:1.3;}
+.rcard-total{font-size:11px;color:var(--blue-dark);margin-top:3px;font-weight:500;}
+.rcard.off{background:var(--gray-light);}
+.rcard.off .rcard-drug,.rcard.off .rcard-unit,.rcard.off .rcard-total{color:var(--text-muted);}
+.rcard.off .rcard-dose{color:var(--gray);}
+
+/* FLUJOGRAMA */
+.fnode{border-radius:var(--radius-sm);padding:11px 14px;font-size:13px;line-height:1.4;}
+.fnode-dec{background:var(--blue-light);color:var(--blue-dark);font-weight:600;text-align:center;border:1.5px solid var(--blue-mid);}
+.fnode-act{background:var(--white);border:1.5px solid var(--gray-border);color:var(--text);}
+.fnode-red{background:var(--red-light);border:1.5px solid #F0B0AA;color:var(--red);font-weight:500;}
+.fnode-green{background:var(--green-light);border:1.5px solid #A8D5AA;color:var(--green);font-weight:500;}
+.fnode-amber{background:var(--amber-light);border:1.5px solid #F0C88A;color:var(--amber);font-weight:500;}
+.farrow{text-align:center;font-size:18px;color:var(--text-muted);padding:3px 0;line-height:1;}
+.fbtn-row{display:flex;gap:8px;margin-top:6px;}
+.fbtn{flex:1;padding:9px 8px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;text-align:center;border:none;font-family:var(--font);}
+.fbtn-si{background:var(--green-light);color:var(--green);}
+.fbtn-no{background:var(--red-light);color:var(--red);}
+.fbtn-cont{background:var(--blue-light);color:var(--blue-dark);width:100%;}
+.freset{padding:10px;border-radius:var(--radius-sm);background:var(--gray-light);border:1px solid var(--gray-border);font-size:13px;cursor:pointer;width:100%;color:var(--text-muted);font-family:var(--font);}
+
+/* CAM-ICU CHECK */
+.cam-item{border-bottom:1px solid var(--gray-border);user-select:none;}
+.cam-item:last-child{border-bottom:none;}
+.cam-header{display:flex;align-items:flex-start;gap:10px;padding:10px 0;cursor:pointer;}
+.cam-cb{width:22px;height:22px;border-radius:5px;border:1.5px solid var(--gray-border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:700;transition:all .15s;margin-top:1px;}
+.cam-cb.on{background:var(--blue);border-color:var(--blue);color:#fff;}
+.cam-txt{font-size:12px;color:var(--text);flex:1;line-height:1.5;}
+.cam-expand-btn{font-size:11px;color:var(--blue);background:var(--blue-light);border:none;border-radius:4px;padding:2px 7px;cursor:pointer;white-space:nowrap;margin-top:2px;font-family:var(--font);font-weight:500;}
+.cam-detail{display:none;background:var(--gray-light);border-radius:var(--radius-sm);padding:10px 12px;margin-bottom:10px;font-size:12px;color:var(--text);line-height:1.6;}
+.cam-detail.open{display:block;}
+.cam-detail-title{font-weight:600;color:var(--blue-dark);margin-bottom:6px;font-size:12px;}
+.cam-detail-section{margin-bottom:8px;}
+.cam-detail-section:last-child{margin-bottom:0;}
+.cam-detail-sub{font-weight:600;color:var(--text-muted);font-size:11px;text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;font-family:var(--mono);}
+.cam-q{background:var(--white);border:1px solid var(--gray-border);border-radius:5px;padding:7px 9px;margin-bottom:5px;font-size:12px;color:var(--text);line-height:1.4;}
+.cam-q:last-child{margin-bottom:0;}
+.cam-q strong{color:var(--blue-dark);}
+.cam-instr{font-size:11px;color:var(--text-muted);line-height:1.5;background:var(--amber-light);border-radius:4px;padding:6px 8px;margin-top:6px;}
+.cam-score{display:inline-block;background:var(--blue-light);color:var(--blue-dark);font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;font-family:var(--mono);}
+.cam-result{padding:11px 14px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;text-align:center;margin-top:10px;letter-spacing:.2px;}
+.cam-pos{background:var(--red-light);color:var(--red);}
+.cam-neg{background:var(--green-light);color:var(--green);}
+.cam-pend{background:var(--gray-light);color:var(--text-muted);}
+
+/* CAM-ICU EXPANDIBLE */
+.cam-crit-block{border:1px solid var(--gray-border);border-radius:var(--radius-sm);margin-bottom:8px;overflow:hidden;}
+.cam-crit-header{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;cursor:pointer;background:var(--gray-light);user-select:none;}
+.cam-chevron{font-size:11px;color:var(--text-muted);flex-shrink:0;}
+.cam-detail{padding:12px;background:var(--white);border-top:1px solid var(--gray-border);}
+.cam-q-section{background:var(--gray-light);border-radius:var(--radius-sm);padding:10px 12px;}
+.cam-q-title{font-size:12px;font-weight:600;color:var(--blue-dark);margin-bottom:6px;font-family:var(--mono);}
+.cam-q-body{font-size:12px;color:var(--text);line-height:1.6;}
+.cam-q-ex{display:block;background:var(--blue-light);color:var(--blue-dark);border-radius:var(--radius-sm);padding:7px 10px;font-style:italic;font-size:12px;margin-top:6px;line-height:1.5;}
+.cam-q-note{font-size:11px;font-weight:600;color:var(--green);background:var(--green-light);border-radius:var(--radius-sm);padding:5px 10px;margin-top:8px;text-align:center;}
+.cam-toggle-row{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px solid var(--gray-border);}
+.cam-yn-btn{padding:7px 20px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:var(--font);}
+.cam-yn-si{background:var(--green-light);color:var(--green);}
+.cam-yn-no{background:var(--red-light);color:var(--red);}
+.cam-letters{font-family:var(--mono);font-size:18px;font-weight:600;letter-spacing:6px;color:var(--blue-dark);background:var(--blue-light);padding:10px 14px;border-radius:var(--radius-sm);text-align:center;margin-top:8px;}
+.cam-qa-row{display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid var(--gray-border);font-size:12px;color:var(--text);}
+.cam-qa-row:last-child{border-bottom:none;}
+.cam-qa-num{width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--mono);}
+.cam-qa-ans{margin-left:auto;font-weight:600;color:var(--blue-dark);font-family:var(--mono);font-size:11px;white-space:nowrap;}
+
+/* PRE-DELIRIC */
+.pd-item{margin-bottom:13px;}
+.pd-label{font-size:12px;font-weight:600;color:var(--blue-dark);font-family:var(--mono);text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px;}
+.pd-btn-group{display:grid;grid-template-columns:repeat(2,1fr);gap:5px;}
+.pd-yn{grid-template-columns:repeat(2,1fr);}
+.pd-btn{padding:9px 8px;border-radius:var(--radius-sm);border:1.5px solid var(--gray-border);background:var(--white);font-size:11px;color:var(--text);cursor:pointer;font-family:var(--font);text-align:center;line-height:1.3;transition:all .12s;}
+.pd-btn:hover{border-color:var(--blue-mid);background:var(--blue-light);}
+.pd-btn.sel{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:600;}
+
+/* BPS INTERACTIVO */
+.bps-btn-group{display:grid;grid-template-columns:1fr 1fr;gap:5px;}
+.bps-btn{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-radius:var(--radius-sm);border:1.5px solid var(--gray-border);background:var(--white);font-size:11px;color:var(--text);cursor:pointer;font-family:var(--font);text-align:left;transition:all .12s;}
+.bps-btn:hover{border-color:var(--blue-mid);background:var(--blue-light);}
+.bps-btn.sel{background:var(--blue);border-color:var(--blue);color:#fff;}
+.bps-btn.sel .bps-score{background:rgba(255,255,255,.25);color:#fff;}
+.bps-score{font-family:var(--mono);font-size:11px;font-weight:700;background:var(--gray-light);color:var(--blue-dark);padding:1px 6px;border-radius:4px;margin-left:6px;flex-shrink:0;}
+
+/* DILUCIÓN ACORDEÓN */
+.dil-toggle{display:flex;align-items:center;justify-content:space-between;padding:8px 13px;background:var(--blue-light);cursor:pointer;border-top:1px solid var(--blue-mid);user-select:none;}
+.dil-toggle span{font-size:11px;font-weight:600;color:var(--blue-dark);font-family:var(--mono);text-transform:uppercase;letter-spacing:.5px;}
+.dil-toggle .dil-chev{font-size:11px;color:var(--blue);}
+.dil-body{display:none;padding:11px 13px;background:#F0F6FD;border-top:1px solid var(--blue-mid);}
+.dil-body.open{display:block;}
+.dil-row{display:flex;justify-content:space-between;align-items:flex-start;padding:5px 0;border-bottom:1px solid var(--blue-mid);}
+.dil-row:last-child{border-bottom:none;}
+.dil-lbl{font-size:12px;color:var(--blue-dark);flex:0 0 110px;font-weight:500;}
+.dil-val{font-size:12px;color:var(--blue-dark);text-align:right;flex:1;line-height:1.4;}
+.dil-alert{background:var(--amber-light);border-left:3px solid var(--amber);border-radius:0 4px 4px 0;padding:7px 10px;margin-top:8px;font-size:11px;color:#7A4A10;line-height:1.5;}
+
+/* ESCALON TABLE */
+.etable-wrap{overflow-x:auto;}
+table.et{border-collapse:collapse;font-size:11px;width:100%;font-family:var(--mono);}
+table.et th{background:var(--blue-dark);color:#fff;padding:5px 4px;text-align:center;font-weight:500;}
+table.et td{padding:5px 4px;text-align:center;border-bottom:1px solid var(--gray-border);color:var(--text);}
+table.et tr:last-child td{border-bottom:none;}
+table.et .hl{background:var(--blue-light);font-weight:600;color:var(--blue-dark);}
+table.et .curr{background:var(--blue);color:#fff;font-weight:700;}
+table.et td:first-child{text-align:left;padding-left:6px;font-size:10px;color:var(--text-muted);font-family:var(--font);}
+</style>
+</head>
+<body>
+<div id="shell">
+
+  <div class="topbar">
+    <h1>Sedación UPC — H. Félix Bulnes</h1>
+    <p>Protocolo Nov 2025 · NOACRED-PROT-SDM-SEDO UPCA 1</p>
+  </div>
+
+  <div class="tabbar">
+    <div class="tabbar-btn on" onclick="tab(0)">Fármacos</div>
+    <div class="tabbar-btn" onclick="tab(1)">Calculadora</div>
+    <div class="tabbar-btn" onclick="tab(2)">Flujograma</div>
+    <div class="tabbar-btn" onclick="tab(3)">Escalas</div>
+    <div class="tabbar-btn" onclick="tab(4)">Delirium</div>
+  </div>
+
+  <div class="pages">
+
+    <!-- ===== FARMACOS ===== -->
+    <div class="page on" id="p0">
+      <!-- FENTANILO -->
+      <div class="card">
+        <div class="card-hd">Fentanilo — Opioide 1ª línea</div>
+        <div class="card-bd">
+          <div class="irow"><span class="ilbl">Vía</span><span class="ival"><span class="badge b-blue">IV infusión</span></span></div>
+          <div class="irow"><span class="ilbl">Dosis infusión</span><span class="ival">0.6 – 3.6 μg/kg/hr</span></div>
+          <div class="irow"><span class="ilbl">Bolo SAS 5-7</span><span class="ival">50 – 100 μg IV</span></div>
+          <div class="irow"><span class="ilbl">Bolo dolor mod-grav</span><span class="ival">25 – 100 μg IV</span></div>
+          <div class="irow"><span class="ilbl">Inicio escalón</span><span class="ival">Escalón 4 · ajustar por peso real</span></div>
+          <div class="irow"><span class="ilbl">Meta</span><span class="ival">EVA &lt; 3 · BPS &lt; 6</span></div>
+        </div>
+        <div class="dil-toggle" onclick="toggleDil('ea-fenta',this)">
+          <span>Efectos adversos y cuidados</span>
+          <span class="dil-chev">▶</span>
+        </div>
+        <div class="dil-body" id="ea-fenta">
+          <div style="font-size:11px;font-weight:600;color:var(--red);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;font-family:var(--mono);">Efectos adversos</div>
+          <div class="dil-row"><span class="dil-lbl"><span class="badge b-red">Grave</span></span><span class="dil-val">Depresión respiratoria · apnea · hipotensión · bradicardia</span></div>
+          <div class="dil-row"><span class="dil-lbl"><span class="badge b-amber">Moderado</span></span><span class="dil-val">Náuseas · vómitos · rigidez muscular torácica (bolo rápido) · sedación excesiva</span></div>
+          <div class="dil-row"><span class="dil-lbl"><span class="badge b-gray">Leve</span></span><span class="dil-val">Constipación · retención urinaria · prurito · diaforesis</span></div>
+          <div style="font-size:11px;font-weight:600;color:var(--blue-dark);text-transform:uppercase;letter-spacing:.4px;margin:10px 0 6px;font-family:var(--mono);">Cuidados de enfermería</div>
+          <div class="dil-row"><span class="dil-lbl">Monitoreo</span><span class="dil-val">FR, SatO₂ y nivel de conciencia c/1h durante ajuste de dosis</span></div>
+          <div class="dil-row"><span class="dil-lbl">Antídoto</span><span class="dil-val">Naloxona 0.4 mg IV · repetir c/2-3 min · máx 10 mg · tener disponible siempre</span></div>
+          <div class="dil-row"><span class="dil-lbl">Bolo IV</span><span class="dil-val">Administrar lento en 2-3 min · nunca en bolo rápido (riesgo rigidez torácica)</span></div>
+          <div class="dil-row"><span class="dil-lbl">Constipación</span><span class="dil-val">Registrar deposiciones · indicar laxantes profilácticos según indicación médica</span></div>
+          <div class="dil-row"><span class="dil-lbl">Tolerancia</span><span class="dil-val">Evaluar necesidad creciente de dosis · no suspender bruscamente (síndrome abstinencia)</span></div>
+          <div class="dil-alert">⚠ Tener equipo de reanimación disponible. En depresión respiratoria: naloxona + ventilación con bolsa mascarilla. Reducción progresiva al destete.</div>
+        </div>
+      </div>
+
+      <!-- PROPOFOL -->
+      <div class="card">
+        <div class="card-hd">Propofol — Hipnótico sedante</div>
+        <div class="card-bd">
+          <div class="irow"><span class="ilbl">Vía</span><span class="ival"><span class="badge b-blue">IV infusión</span></span></div>
+          <div class="irow"><span class="ilbl">Dosis infusión</span><span class="ival">0.5 – 3 mg/kg/hr</span></div>
+          <div class="irow"><span class="ilbl">Bolo rescate</span><span class="ival">10 – 30 mg IV</span></div>
+          <div class="irow"><span class="ilbl">Uso</span><span class="ival">SAS 1-2 y SAS 3-4</span></div>
+        </div>
+        <div class="dil-toggle" onclick="toggleDil('ea-propo',this)">
+          <span>Efectos adversos y cuidados</span>
+          <span class="dil-chev">▶</span>
+        </div>
+        <div class="dil-body" id="ea-propo">
+          <div style="font-size:11px;font-weight:600;color:var(--red);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;font-family:var(--mono);">Efectos adversos</div>
+          <div class="dil-row"><span class="dil-lbl"><span class="badge b-red">Grave</span></span><span class="dil-val">Hipotensión · depresión respiratoria · síndrome infusión propofol (PRIS): acidosis metabólica, rabdomiólisis, falla cardíaca</span></div>
+          <div class="dil-row"><span class="dil-lbl"><span class="badge b-amber">Moderado</span></span><span class="dil-val">Hipertrigliceridemia · dolor en sitio de infusión · bradicardia · depresión miocárdica</span></div>
+          <div class="dil-row"><span class="dil-lbl"><span class="badge b-gray">Leve</span></span><span class="dil-val">Orina verde (inocuo) · movimientos involuntarios al inicio · hiperlipemia</span></div>
+          <div style="font-size:11px;font-weight:600;color:var(--blue-dark);text-transform:uppercase;letter-spacing:.4px;margin:10px 0 6px;font-family:var(--mono);">Cuidados de enfermería</div>
+          <div class="dil-row"><span class="dil-lbl">Monitoreo PA</span><span class="dil-val">PA y FC c/30 min durante inicio o cambios de dosis · vigilar hipotensión</span></div>
+          <div class="dil-row"><span class="dil-lbl">PRIS</span><span class="dil-val">Vigilar triglicéridos c/48-72h en infusiones prolongadas · avisar si &gt;400 mg/dL</span></div>
+          <div class="dil-row"><span class="dil-lbl">Equipo</span><span class="dil-val">Cambiar equipo de infusión cada 12h · frasco abierto: usar en máx 6h</span></div>
+          <div class="dil-row"><span class="dil-lbl">Asepsia</span><span class="dil-val">Técnica estéril estricta · no contaminar frasco · medio de cultivo para gérmenes</span></div>
+          <div class="dil-row"><span class="dil-lbl">Vía</span><span class="dil-val">Preferir vía central · si periférica: vigilar flebitis y dolor en punto de punción</span></div>
+          <div class="dil-alert">⚠ Sin antídoto específico. Ante sospecha de PRIS (orina oscura, CK elevada, acidosis): suspender e informar de inmediato al médico.</div>
+        </div>
+      </div>
+
+      <!-- MIDAZOLAM -->
+      <div class="card">
+        <div class="card-hd">Midazolam — Benzodiazepina</div>
+        <div class="card-bd">
+          <div class="irow"><span class="ilbl">Vía</span><span class="ival"><span class="badge b-blue">IV infusión</span></span></div>
+          <div class="irow"><span class="ilbl">Dosis infusión</span><span class="ival">0.03 – 0.09 mg/kg/hr</span></div>
+          <div class="irow"><span class="ilbl">Bolo rescate</span><span class="ival">2 – 3 mg IV</span></div>
+          <div class="irow"><span class="ilbl">Agitación persist.</span><span class="ival">1 – 3 mg IV (último recurso)</span></div>
+          <div class="irow"><span class="ilbl">⚠ Nota</span><span class="ival">Evitar en período de evaluación SAS · riesgo delirium</span></div>
+        </div>
+        <div class="dil-toggle" onclick="toggleDil('ea-mida',this)">
+          <span>Efectos adversos y cuidados</span>
+          <span class="dil-chev">▶</span>
+        </div>
+        <div class="dil-body" id="ea-mida">
+          <div style="font-size:11px;font-weight:600;color:var(--red);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;font-family:var(--mono);">Efectos adversos</div>
+          <div class="dil-row"><span class="dil-lbl"><span class="badge b-red">Grave</span></span><span class="dil-val">Depresión respiratoria · apnea · hipotensión severa · paro cardiorrespiratorio (bolo rápido)</span></div>
+          <div class="dil-row"><span class="dil-lbl"><span class="badge b-amber">Moderado</span></span><span class="dil-val">Delirium · amnesia anterógrada · sedación prolongada · tolerancia con uso continuo</span></div>
+          <div class="dil-row"><span class="dil-lbl"><span class="badge b-gray">Leve</span></span><span class="dil-val">Náuseas · cefalea · reacciones paradojales (agitación) · hipo</span></div>
+          <div style="font-size:11px;font-weight:600;color:var(--blue-dark);text-transform:uppercase;letter-spacing:.4px;margin:10px 0 6px;font-family:var(--mono);">Cuidados de enfermería</div>
+          <div class="dil-row"><span class="dil-lbl">Antídoto</span><span class="dil-val">Flumazenil 0.2 mg IV · repetir c/1 min hasta máx 1 mg · vigilar re-sedación</span></div>
+          <div class="dil-row"><span class="dil-lbl">Delirium</span><span class="dil-val">Evitar en evaluación SAS · aplicar CAM-ICU c/6h · aumenta riesgo en adultos mayores</span></div>
+          <div class="dil-row"><span class="dil-lbl">Bolo IV</span><span class="dil-val">Administrar lento en 2-5 min · nunca en bolo directo rápido</span></div>
+          <div class="dil-row"><span class="dil-lbl">Abstinencia</span><span class="dil-val">No suspender bruscamente si &gt;48h de infusión continua · reducción gradual obligatoria</span></div>
+          <div class="dil-row"><span class="dil-lbl">Monitoreo</span><span class="dil-val">FR, SatO₂ y nivel de conciencia c/1h durante ajuste · SAS c/4h</span></div>
+          <div class="dil-alert">⚠ Evitar combinación con opioides sin monitoreo estricto: riesgo sinérgico de depresión respiratoria. Mayor riesgo de delirium y estadía prolongada.</div>
+        </div>
+      </div>
+
+      <!-- DEXMEDETOMIDINA -->
+      <div class="card">
+        <div class="card-hd">Dexmedetomidina — Alfa-2 agonista</div>
+        <div class="card-bd">
+          <div class="irow"><span class="ilbl">Inicio</span><span class="ival">0.7 μg/kg/hr</span></div>
+          <div class="irow"><span class="ilbl">Rango</span><span class="ival">0.4 – 1.4 μg/kg/hr</span></div>
+          <div class="irow"><span class="ilbl">Uso especial</span><span class="ival">Delirium · destete sedación · SAS 3-4</span></div>
+        </div>
+        <div class="dil-toggle" onclick="toggleDil('ea-dex',this)">
+          <span>Efectos adversos y cuidados</span>
+          <span class="dil-chev">▶</span>
+        </div>
+        <div class="dil-body" id="ea-dex">
+          <div style="font-size:11px;font-weight:600;color:var(--red);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;font-family:var(--mono);">Efectos adversos</div>
+          <div class="dil-row"><span class="dil-lbl"><span class="badge b-red">Grave</span></span><span class="dil-val">Bradicardia severa · bloqueo AV · hipotensión · parada sinusal (inicio rápido)</span></div>
+          <div class="dil-row"><span class="dil-lbl"><span class="badge b-amber">Moderado</span></span><span class="dil-val">Hipertensión transitoria al inicio · boca seca · náuseas · taquicardia refleja</span></div>
+          <div class="dil-row"><span class="dil-lbl"><span class="badge b-gray">Leve</span></span><span class="dil-val">Escalofríos · agitación al destete · hipoglicemia</span></div>
+          <div style="font-size:11px;font-weight:600;color:var(--blue-dark);text-transform:uppercase;letter-spacing:.4px;margin:10px 0 6px;font-family:var(--mono);">Cuidados de enfermería</div>
+          <div class="dil-row"><span class="dil-lbl">Monitoreo</span><span class="dil-val">ECG continuo y PA c/15 min durante primera hora · FC y PA c/1h en mantenimiento</span></div>
+          <div class="dil-row"><span class="dil-lbl">Inicio</span><span class="dil-val">NO administrar bolo de carga rápido · riesgo de bradicardia e hipotensión severas</span></div>
+          <div class="dil-row"><span class="dil-lbl">Bradicardia</span><span class="dil-val">FC &lt;50: reducir velocidad infusión · FC &lt;40 o sintomática: suspender e informar</span></div>
+          <div class="dil-row"><span class="dil-lbl">Vía</span><span class="dil-val">Vía venosa central preferente · no administrar en bolo IV directo</span></div>
+          <div class="dil-row"><span class="dil-lbl">Destete</span><span class="dil-val">Reducir gradualmente · monitorizar agitación de rebote al suspender</span></div>
+          <div class="dil-alert">⚠ Precaución en pacientes con bloqueo AV previo, bradicardia basal o en uso de otros fármacos bradicardizantes (betabloqueadores, digoxina).</div>
+        </div>
+      </div>
+
+      <!-- KETAMINA -->
+      <div class="card">
+        <div class="card-hd">Ketamina — Disociativo</div>
+        <div class="card-bd">
+          <div class="irow"><span class="ilbl">Dosis</span><span class="ival">4 – 30 μg/kg/min (escalones 5–12)</span></div>
+          <div class="irow"><span class="ilbl">Uso</span><span class="ival">3ª droga: fenta+propo+keta o fenta+mida+keta</span></div>
+        </div>
+        <div class="dil-toggle" onclick="toggleDil('ea-keta',this)">
+          <span>Efectos adversos y cuidados</span>
+          <span class="dil-chev">▶</span>
+        </div>
+        <div class="dil-body" id="ea-keta">
+          <div style="font-size:11px;font-weight:600;color:var(--red);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;font-family:var(--mono);">Efectos adversos</div>
+          <div class="dil-row"><span class="dil-lbl"><span class="badge b-red">Grave</span></span><span class="dil-val">Laringoespasmo · hipertensión severa · aumento PIC (contraindicado en neurocrít.)</span></div>
+          <div class="dil-row"><span class="dil-lbl"><span class="badge b-amber">Moderado</span></span><span class="dil-val">Alucinaciones · delirium emergente · taquicardia · aumento secreciones bronquiales</span></div>
+          <div class="dil-row"><span class="dil-lbl"><span class="badge b-gray">Leve</span></span><span class="dil-val">Nistagmo · movimientos involuntarios · hipersalivación · sueños vívidos</span></div>
+          <div style="font-size:11px;font-weight:600;color:var(--blue-dark);text-transform:uppercase;letter-spacing:.4px;margin:10px 0 6px;font-family:var(--mono);">Cuidados de enfermería</div>
+          <div class="dil-row"><span class="dil-lbl">Alucinaciones</span><span class="dil-val">Usar SIEMPRE con BDZ o propofol para prevenir delirium emergente</span></div>
+          <div class="dil-row"><span class="dil-lbl">Secreciones</span><span class="dil-val">Aspirar secreciones frecuentemente · considerar atropina previa por hipersalivación</span></div>
+          <div class="dil-row"><span class="dil-lbl">Monitoreo PA</span><span class="dil-val">PA y FC c/30 min · efecto simpaticomimético puede elevar PA significativamente</span></div>
+          <div class="dil-row"><span class="dil-lbl">Contraindicación</span><span class="dil-val">No usar en pacientes neurocríticos · aumenta PIC y PIO</span></div>
+          <div class="dil-row"><span class="dil-lbl">Compatibilidad</span><span class="dil-val">No mezclar en misma jeringa con propofol · compatible con fentanilo y midazolam</span></div>
+          <div class="dil-alert">⚠ Si aparecen alucinaciones o agitación emergente: aumentar dosis de BDZ/propofol y disminuir ketamina. Registrar en hoja de enfermería.</div>
+        </div>
+      </div>
+
+      <!-- BNM -->
+      <div class="card">
+        <div class="card-hd">Bloqueadores neuromusculares</div>
+        <div class="card-bd">
+          <div class="irow"><span class="ilbl">Rocuronio ✓ preferido</span><span class="ival">5 – 12 μg/kg/min</span></div>
+          <div class="irow"><span class="ilbl">Atracurio</span><span class="ival">2 – 15 μg/kg/min · RAM: hipotensión, anafilaxia</span></div>
+          <div class="irow"><span class="ilbl">Indicación</span><span class="ival">SAS 1 sostenido + ≥3 sedantes sin resultado</span></div>
+          <div class="irow"><span class="ilbl">TOF</span><span class="ival">Mantener 1-2 · evaluar c/6h</span></div>
+        </div>
+        <div class="dil-toggle" onclick="toggleDil('ea-bnm',this)">
+          <span>Efectos adversos y cuidados</span>
+          <span class="dil-chev">▶</span>
+        </div>
+        <div class="dil-body" id="ea-bnm">
+          <div style="font-size:11px;font-weight:600;color:var(--red);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;font-family:var(--mono);">Efectos adversos</div>
+          <div class="dil-row"><span class="dil-lbl"><span class="badge b-red">Grave</span></span><span class="dil-val">Relajación vigil (consciencia sin movimiento) · apnea · parálisis prolongada · anafilaxia</span></div>
+          <div class="dil-row"><span class="dil-lbl"><span class="badge b-amber">Moderado</span></span><span class="dil-val">Miopatía del paciente crítico · hipotensión (atracurio) · taquicardia sinusal</span></div>
+          <div class="dil-row"><span class="dil-lbl"><span class="badge b-gray">Leve — Atracurio</span></span><span class="dil-val">Rash cutáneo · eritema · broncoespasmo (liberación de histamina)</span></div>
+          <div style="font-size:11px;font-weight:600;color:var(--blue-dark);text-transform:uppercase;letter-spacing:.4px;margin:10px 0 6px;font-family:var(--mono);">Cuidados de enfermería</div>
+          <div class="dil-row"><span class="dil-lbl">Sedación previa</span><span class="dil-val">NUNCA iniciar BNM sin sedación profunda asegurada · verificar SAS 1-2 antes</span></div>
+          <div class="dil-row"><span class="dil-lbl">TOF</span><span class="dil-val">Medir c/6h · objetivo TOF 1-2 · registrar en hoja de enfermería y evolución</span></div>
+          <div class="dil-row"><span class="dil-lbl">Ojos</span><span class="dil-val">Aplicar lágrimas artificiales c/4h y ocluir párpados · riesgo de úlcera corneal</span></div>
+          <div class="dil-row"><span class="dil-lbl">Piel</span><span class="dil-val">Cambios de posición c/2h · usar colchón antiescara · vigilar zonas de presión</span></div>
+          <div class="dil-row"><span class="dil-lbl">Secreciones</span><span class="dil-val">Aspiración bronquial frecuente · higiene bronquial activa</span></div>
+          <div class="dil-row"><span class="dil-lbl">Reversión</span><span class="dil-val">Rocuronio: Sugammadex 16 mg/kg IV · Neostigmina solo para no despolarizantes</span></div>
+          <div class="dil-alert">⚠ El paciente bajo BNM NO puede comunicar dolor, angustia ni malestar. Mantener analgesia y sedación activas en todo momento. Hablar con el paciente y explicar cada procedimiento.</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd">Analgesia no opioide (coadyuvante)</div>
+        <div class="card-bd">
+          <div class="irow"><span class="ilbl">Paracetamol</span><span class="ival">1 g c/8h enteral (IV si vía enteral no disponible o noradrenalina &gt;0.2 μg/kg/min)</span></div>
+          <div class="irow"><span class="ilbl">Metamizol</span><span class="ival">Coadyuvante reducción opioides</span></div>
+          <div class="irow"><span class="ilbl">AINEs</span><span class="ival">IV/VO/rectal · procedimientos discretos</span></div>
+          <div class="irow"><span class="ilbl">Pregabalina</span><span class="ival">Dolor neuropático</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd">Antipsicóticos — Delirium (uso off-label)</div>
+        <div class="card-bd">
+          <div class="irow"><span class="ilbl">Haloperidol 1ª</span><span class="ival">Leve 0.5-2.5 mg · Mod 2-5 mg · Sev 10-20 mg IV/IM c/20-30 min</span></div>
+          <div class="irow"><span class="ilbl">Quetiapina</span><span class="ival">12.5 – 25 mg/día VO · máx 400 mg/día</span></div>
+          <div class="irow"><span class="ilbl">Olanzapina</span><span class="ival">2.5 – 15 mg/día VO</span></div>
+          <div class="irow"><span class="ilbl">Risperidona</span><span class="ival">0.25 – 0.5 mg/12h VO · máx 6 mg/día</span></div>
+        </div>
+      </div>
+      <div class="alert alert-amber">⚠ Antipsicóticos: usar el menor tiempo posible. Asociados a mayor mortalidad. No existe evidencia clara de superioridad entre ellos.</div>
+    </div>
+
+    <!-- ===== CALCULADORA ===== -->
+    <div class="page" id="p1">
+      <div class="card">
+        <div class="card-hd">Datos del paciente</div>
+        <div class="card-bd">
+          <div class="input-row">
+            <label>Peso (kg)</label>
+            <input type="number" id="peso" value="70" min="30" max="200" oninput="calc()"/>
+          </div>
+          <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">Combinación de fármacos</div>
+          <div class="pill-row" id="combo-pills"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd">Escalón de terapia</div>
+        <div class="card-bd">
+          <div class="slider-label"><span>Escalón</span><strong id="esc-val">4</strong></div>
+          <input type="range" id="escalon" min="1" max="12" value="4" step="1" oninput="calc()"/>
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text-muted);">
+            <span>1 mín</span><span>↑ inicio recomendado</span><span>12 máx</span>
+          </div>
+          <div id="esc-table-wrap" style="margin-top:10px;"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd" id="calc-title">Dosis calculadas</div>
+        <div class="card-bd">
+          <div class="result-grid" id="result-grid"></div>
+          <div id="calc-nota" style="margin-top:10px;font-size:11px;color:var(--text-muted);line-height:1.5;"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd">Bolos de rescate (SAS 5-7)</div>
+        <div class="card-bd">
+          <div class="irow"><span class="ilbl">Fentanilo</span><span class="ival">50 – 100 μg IV</span></div>
+          <div class="irow"><span class="ilbl">Propofol</span><span class="ival">10 – 30 mg IV</span></div>
+          <div class="irow"><span class="ilbl">Midazolam</span><span class="ival">2 – 3 mg IV</span></div>
+          <div class="irow"><span class="ilbl">Sin respuesta</span><span class="ival">Subir escalón → avisar médico si persiste</span></div>
+        </div>
+      </div>
+      <div class="alert alert-blue">Dosis calculadas según tablas del protocolo HFB. Verificar siempre con peso real. Iniciar en escalón 4. Ajustar según meta SAS indicada por médico.</div>
+    </div>
+
+    <!-- ===== FLUJOGRAMA ===== -->
+    <div class="page" id="p2">
+      <div class="card">
+        <div class="card-hd">Algoritmo de decisión — Sedoanalgesia UPC</div>
+        <div class="card-bd" id="flow-body"></div>
+      </div>
+      <button class="freset" onclick="flowReset()">↺ Reiniciar flujograma</button>
+    </div>
+
+    <!-- ===== ESCALAS ===== -->
+    <div class="page" id="p3">
+      <div class="card">
+        <div class="card-hd">EVA — Escala visual análoga</div>
+        <div class="card-bd">
+          <div class="irow"><span class="ilbl">0</span><span class="ival"><span class="badge b-green">Sin dolor</span></span></div>
+          <div class="irow"><span class="ilbl">1 – 2</span><span class="ival"><span class="badge b-green">Dolor leve</span></span></div>
+          <div class="irow"><span class="ilbl">3 – 4</span><span class="ival"><span class="badge b-amber">Moderado · necesita rescate</span></span></div>
+          <div class="irow"><span class="ilbl">5 – 6</span><span class="ival"><span class="badge b-amber">Intenso</span></span></div>
+          <div class="irow"><span class="ilbl">7 – 8</span><span class="ival"><span class="badge b-red">Severo</span></span></div>
+          <div class="irow"><span class="ilbl">9 – 10</span><span class="ival"><span class="badge b-red">Insoportable</span></span></div>
+          <div class="irow"><span class="ilbl">Meta / registro</span><span class="ival">EVA &lt; 3 · c/4h o SOS · pacientes que comunican</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd">BPS — Behavioural Pain Scale · Evaluación interactiva</div>
+        <div class="card-bd">
+          <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">Selecciona la opción observada en cada ítem. El puntaje se calcula automáticamente.</div>
+
+          <!-- ÍTEM 1: Expresión facial -->
+          <div style="margin-bottom:12px;">
+            <div style="font-size:12px;font-weight:600;color:var(--blue-dark);font-family:var(--mono);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;">1 · Expresión facial</div>
+            <div class="bps-btn-group" id="bps-g0">
+              <button class="bps-btn" onclick="setBPS(0,1)">Relajado<span class="bps-score">1</span></button>
+              <button class="bps-btn" onclick="setBPS(0,2)">Parcialmente contraído<span class="bps-score">2</span></button>
+              <button class="bps-btn" onclick="setBPS(0,3)">Fuertemente contraído<span class="bps-score">3</span></button>
+              <button class="bps-btn" onclick="setBPS(0,4)">Muecas de dolor<span class="bps-score">4</span></button>
+            </div>
+          </div>
+
+          <!-- ÍTEM 2: Miembros superiores -->
+          <div style="margin-bottom:12px;">
+            <div style="font-size:12px;font-weight:600;color:var(--blue-dark);font-family:var(--mono);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;">2 · Movimiento miembros superiores</div>
+            <div class="bps-btn-group" id="bps-g1">
+              <button class="bps-btn" onclick="setBPS(1,1)">Sin movimientos<span class="bps-score">1</span></button>
+              <button class="bps-btn" onclick="setBPS(1,2)">Parcialmente flexionado<span class="bps-score">2</span></button>
+              <button class="bps-btn" onclick="setBPS(1,3)">Fuertemente flexionado<span class="bps-score">3</span></button>
+              <button class="bps-btn" onclick="setBPS(1,4)">Permanentemente flexionado<span class="bps-score">4</span></button>
+            </div>
+          </div>
+
+          <!-- ÍTEM 3: Adaptación VM -->
+          <div style="margin-bottom:14px;">
+            <div style="font-size:12px;font-weight:600;color:var(--blue-dark);font-family:var(--mono);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;">3 · Adaptación al ventilador</div>
+            <div class="bps-btn-group" id="bps-g2">
+              <button class="bps-btn" onclick="setBPS(2,1)">Tolera la VM<span class="bps-score">1</span></button>
+              <button class="bps-btn" onclick="setBPS(2,2)">Tose pero tolera<span class="bps-score">2</span></button>
+              <button class="bps-btn" onclick="setBPS(2,3)">Lucha con el ventilador<span class="bps-score">3</span></button>
+              <button class="bps-btn" onclick="setBPS(2,4)">Imposible ventilar<span class="bps-score">4</span></button>
+            </div>
+          </div>
+
+          <!-- RESULTADO -->
+          <div id="bps-result-box">
+            <div style="display:flex;align-items:center;justify-content:space-between;background:var(--gray-light);border-radius:var(--radius-sm);padding:10px 14px;border:1px solid var(--gray-border);">
+              <div>
+                <div style="font-size:11px;color:var(--text-muted);font-family:var(--mono);font-weight:600;text-transform:uppercase;letter-spacing:.4px;">Puntaje total BPS</div>
+                <div style="font-size:11px;color:var(--text-muted);margin-top:2px;" id="bps-subtotals">Expresión: — · Miembros: — · VM: —</div>
+              </div>
+              <div style="text-align:center;">
+                <div style="font-size:32px;font-weight:700;font-family:var(--mono);color:var(--gray);" id="bps-score-num">—</div>
+                <div style="font-size:10px;color:var(--text-muted);">de 12</div>
+              </div>
+            </div>
+            <div id="bps-interp" style="margin-top:6px;padding:9px 12px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;text-align:center;display:none;"></div>
+          </div>
+
+          <button onclick="resetBPS()" style="margin-top:10px;width:100%;padding:8px;border-radius:var(--radius-sm);background:var(--gray-light);border:1px solid var(--gray-border);font-size:12px;color:var(--text-muted);cursor:pointer;font-family:var(--font);">↺ Reiniciar BPS</button>
+
+          <div style="margin-top:10px;font-size:11px;color:var(--text-muted);line-height:1.5;background:var(--gray-light);padding:8px 10px;border-radius:var(--radius-sm);">
+            <b>Referencia:</b> Sin dolor = 3 · Dolor significativo ≥ 6 · Máximo dolor = 12<br>
+            <b>Meta:</b> BPS &lt; 6 · Uso en pacientes sin comunicación verbal · Registrar c/4h o SOS
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd">SAS — Sedation-Agitation Scale</div>
+        <div class="card-bd">
+          <div class="srow"><div class="snum" style="background:#FDECEA;color:#C0392B;">7</div><div><div class="sterm">Agitación peligrosa</div><div class="sdesc">Intenta retirar TET/catéteres · arremete contra personal</div></div></div>
+          <div class="srow"><div class="snum" style="background:#FDECEA;color:#C0392B;">6</div><div><div class="sterm">Muy agitado</div><div class="sdesc">Muerde TET · no se calma al hablarle · requiere contención</div></div></div>
+          <div class="srow"><div class="snum" style="background:#FDF3E3;color:#B7701A;">5</div><div><div class="sterm">Agitado</div><div class="sdesc">Ansioso · intenta sentarse · se calma con estímulo verbal</div></div></div>
+          <div class="srow"><div class="snum" style="background:#EDF7EE;color:#2E7D32;">4</div><div><div class="sterm">Calmado y cooperador ✓</div><div class="sdesc">Fácilmente despertable · obedece órdenes · META habitual</div></div></div>
+          <div class="srow"><div class="snum" style="background:#E8F1FB;color:#1A5FA8;">3</div><div><div class="sterm">Sedado</div><div class="sdesc">Difícil despertar · responde a estímulos verbales/suaves</div></div></div>
+          <div class="srow"><div class="snum" style="background:#E8F1FB;color:#1A5FA8;">2</div><div><div class="sterm">Muy sedado</div><div class="sdesc">Despierta con estímulo físico · no comunica ni obedece</div></div></div>
+          <div class="srow"><div class="snum" style="background:#EEEDFE;color:#4A3AB5;">1</div><div><div class="sterm">No despertable</div><div class="sdesc">Solo mueve/gesticula con estímulo doloroso · monitorear BIS</div></div></div>
+          <div class="irow" style="margin-top:6px;"><span class="ilbl">Registro</span><span class="ival">c/4h hoja enfermería · c/12h evolución clínica</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd">BIS — Índice biespectral</div>
+        <div class="card-bd">
+          <div class="irow"><span class="ilbl">80 – 100</span><span class="ival">Despierto / sedación moderada</span></div>
+          <div class="irow"><span class="ilbl">60 – 80</span><span class="ival">Sedación profunda</span></div>
+          <div class="irow"><span class="ilbl">40 – 60</span><span class="ival">Sedación muy profunda / anestesia</span></div>
+          <div class="irow"><span class="ilbl">&lt; 40</span><span class="ival">Supresión de ondas · EEG plano</span></div>
+          <div class="irow"><span class="ilbl">Indicación</span><span class="ival">Pacientes SAS 1 · detectar infra/sobre sedación</span></div>
+          <div class="irow"><span class="ilbl">Frecuencia</span><span class="ival">c/12h · registrar en hoja enfermería y evolución</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd">CAM-ICU — Evaluación interactiva</div>
+        <div class="card-bd">
+          <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">Evalúa cada criterio y marca si está presente. Toca el título para ver las preguntas a realizar.</div>
+
+          <!-- CRITERIO 1 -->
+          <div class="cam-crit-block" id="block0">
+            <div class="cam-crit-header" onclick="expandCrit(0)">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div class="cam-cb on" id="cb0">✓</div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:var(--text);">Criterio 1 — Inicio agudo o fluctuante</div>
+                  <div style="font-size:11px;color:var(--text-muted);margin-top:1px;">Toca para ver preguntas</div>
+                </div>
+              </div>
+              <div class="cam-chevron" id="chev0">▼</div>
+            </div>
+            <div class="cam-detail" id="det0">
+              <div class="cam-q-section">
+                <div class="cam-q-title">1A · ¿Cambio agudo en el estado mental basal?</div>
+                <div class="cam-q-body">Comparar con el estado mental previo al ingreso a la UCI. Preguntar a familiares o revisar ficha clínica.<br><br>
+                  <span class="cam-q-ex">¿Hubo un cambio brusco en el comportamiento, orientación o nivel de conciencia respecto a cómo era antes del ingreso?</span>
+                </div>
+              </div>
+              <div class="cam-q-section" style="margin-top:8px;">
+                <div class="cam-q-title">1B · ¿Fluctuación en las últimas 24h?</div>
+                <div class="cam-q-body">Evaluar si el comportamiento fluctúa a lo largo del día, basado en SAS, Glasgow o evaluaciones previas.<br><br>
+                  <span class="cam-q-ex">¿El paciente ha estado más agitado o más somnoliento que en evaluaciones previas del turno? ¿El nivel de conciencia varía entre evaluaciones?</span>
+                </div>
+              </div>
+              <div class="cam-q-note">✓ Positivo si responde SÍ a 1A o 1B</div>
+              <div class="cam-toggle-row">
+                <span style="font-size:12px;color:var(--text-muted);">¿Criterio presente?</span>
+                <div style="display:flex;gap:6px;">
+                  <button class="cam-yn-btn cam-yn-si" onclick="setCam(0,true)">Sí</button>
+                  <button class="cam-yn-btn cam-yn-no" onclick="setCam(0,false)">No</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CRITERIO 2 -->
+          <div class="cam-crit-block" id="block1">
+            <div class="cam-crit-header" onclick="expandCrit(1)">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div class="cam-cb" id="cb1"></div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:var(--text);">Criterio 2 — Inatención</div>
+                  <div style="font-size:11px;color:var(--text-muted);margin-top:1px;">Toca para ver la prueba ASE</div>
+                </div>
+              </div>
+              <div class="cam-chevron" id="chev1">▶</div>
+            </div>
+            <div class="cam-detail" id="det1" style="display:none;">
+              <div class="cam-q-section">
+                <div class="cam-q-title">2A · ASE Auditivo (preferente)</div>
+                <div class="cam-q-body">Decir al paciente: <em>"Voy a leerle 10 letras. Apriete mi mano cada vez que escuche la letra A."</em><br><br>
+                Leer en voz normal, 1 letra por segundo:<br>
+                <div class="cam-letters">S &nbsp; A &nbsp; V &nbsp; E &nbsp; A &nbsp; H &nbsp; A &nbsp; A &nbsp; R &nbsp; T</div>
+                <div style="font-size:11px;color:var(--text-muted);margin-top:6px;">Alternativa en español: <strong>A B A R A T A R A N</strong></div>
+                <div style="font-size:11px;margin-top:6px;color:var(--text);">Error = no aprieta con "A" o aprieta con otra letra.<br>
+                <strong>Positivo si errores ≥ 3 (puntaje &lt; 8/10)</strong></div>
+                </div>
+              </div>
+              <div class="cam-q-section" style="margin-top:8px;">
+                <div class="cam-q-title">2B · ASE Visual (si no puede hacer auditivo)</div>
+                <div class="cam-q-body">
+                  <strong>Paso 1:</strong> Mostrar 5 dibujos de objetos comunes, 3 seg c/u. Decir: <em>"Mírelos y trate de recordarlos."</em><br><br>
+                  <strong>Paso 2:</strong> Mostrar 10 dibujos (5 repetidos + 5 nuevos). Decir: <em>"Indíqueme con la cabeza si ya lo vio antes."</em><br><br>
+                  <strong>Positivo si puntaje &lt; 8/10</strong>
+                </div>
+              </div>
+              <div class="cam-q-note">✓ Positivo si puntaje 2A o 2B &lt; 8/10</div>
+              <div class="cam-toggle-row">
+                <span style="font-size:12px;color:var(--text-muted);">¿Criterio presente?</span>
+                <div style="display:flex;gap:6px;">
+                  <button class="cam-yn-btn cam-yn-si" onclick="setCam(1,true)">Sí</button>
+                  <button class="cam-yn-btn cam-yn-no" onclick="setCam(1,false)">No</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CRITERIO 3 -->
+          <div class="cam-crit-block" id="block2">
+            <div class="cam-crit-header" onclick="expandCrit(2)">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div class="cam-cb" id="cb2"></div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:var(--text);">Criterio 3 — Pensamiento desorganizado</div>
+                  <div style="font-size:11px;color:var(--text-muted);margin-top:1px;">Toca para ver preguntas y órdenes</div>
+                </div>
+              </div>
+              <div class="cam-chevron" id="chev2">▶</div>
+            </div>
+            <div class="cam-detail" id="det2" style="display:none;">
+              <div class="cam-q-section">
+                <div class="cam-q-title">3A · Preguntas de Sí o No — Grupo A</div>
+                <div class="cam-q-body">
+                  <div class="cam-qa-row"><span class="cam-qa-num">1</span><span>¿Puede flotar una piedra en el agua?</span><span class="cam-qa-ans">No</span></div>
+                  <div class="cam-qa-row"><span class="cam-qa-num">2</span><span>¿Existen peces en el mar?</span><span class="cam-qa-ans">Sí</span></div>
+                  <div class="cam-qa-row"><span class="cam-qa-num">3</span><span>¿Pesa un kilo más que dos kilos?</span><span class="cam-qa-ans">No</span></div>
+                  <div class="cam-qa-row"><span class="cam-qa-num">4</span><span>¿Se puede usar un martillo para clavar un clavo?</span><span class="cam-qa-ans">Sí</span></div>
+                  <div style="font-size:11px;color:var(--text-muted);margin-top:8px;">Grupo B (días alternos): piedra→hoja · peces→jirafas · 1kg→2kg · martillo→cortar madera</div>
+                </div>
+              </div>
+              <div class="cam-q-section" style="margin-top:8px;">
+                <div class="cam-q-title">3B · Órdenes motoras</div>
+                <div class="cam-q-body">
+                  Decir: <em>"Muéstreme cuántos dedos hay aquí"</em> (mostrar 2 dedos al paciente).<br><br>
+                  Luego: <em>"Haga lo mismo con la otra mano."</em><br>
+                  Si no puede mover ambos brazos: <em>"Agregue un dedo más."</em><br><br>
+                  <strong>1 punto si obedece ambas órdenes correctamente.</strong>
+                </div>
+              </div>
+              <div class="cam-q-note">✓ Positivo si puntaje combinado 3A + 3B &lt; 4 de 5</div>
+              <div class="cam-toggle-row">
+                <span style="font-size:12px;color:var(--text-muted);">¿Criterio presente?</span>
+                <div style="display:flex;gap:6px;">
+                  <button class="cam-yn-btn cam-yn-si" onclick="setCam(2,true)">Sí</button>
+                  <button class="cam-yn-btn cam-yn-no" onclick="setCam(2,false)">No</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CRITERIO 4 -->
+          <div class="cam-crit-block" id="block3">
+            <div class="cam-crit-header" onclick="expandCrit(3)">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div class="cam-cb" id="cb3"></div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:var(--text);">Criterio 4 — Nivel de conciencia alterado</div>
+                  <div style="font-size:11px;color:var(--text-muted);margin-top:1px;">Toca para ver criterio</div>
+                </div>
+              </div>
+              <div class="cam-chevron" id="chev3">▶</div>
+            </div>
+            <div class="cam-detail" id="det3" style="display:none;">
+              <div class="cam-q-section">
+                <div class="cam-q-title">Evaluación del nivel de conciencia mediante SAS</div>
+                <div class="cam-q-body">
+                  Evaluar la escala SAS actual del paciente.<br><br>
+                  <div class="cam-qa-row" style="background:var(--green-light);border-radius:6px;padding:6px 10px;margin-bottom:4px;">
+                    <span class="cam-qa-num" style="background:#2E7D32;color:#fff;">4</span>
+                    <span style="color:var(--green);font-weight:600;">Calmado y cooperador → SAS normal → Criterio 4 NEGATIVO</span>
+                  </div>
+                  <div class="cam-qa-row" style="background:var(--red-light);border-radius:6px;padding:6px 10px;">
+                    <span class="cam-qa-num" style="background:var(--red);color:#fff;">≠4</span>
+                    <span style="color:var(--red);font-weight:600;">SAS 1-2-3 o 5-6-7 → Criterio 4 POSITIVO</span>
+                  </div>
+                  <div style="font-size:11px;color:var(--text-muted);margin-top:8px;">No requiere hacer preguntas: solo verificar la escala SAS documentada.</div>
+                </div>
+              </div>
+              <div class="cam-q-note">✓ Positivo si SAS es diferente a 4</div>
+              <div class="cam-toggle-row">
+                <span style="font-size:12px;color:var(--text-muted);">¿Criterio presente?</span>
+                <div style="display:flex;gap:6px;">
+                  <button class="cam-yn-btn cam-yn-si" onclick="setCam(3,true)">Sí</button>
+                  <button class="cam-yn-btn cam-yn-no" onclick="setCam(3,false)">No</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cam-result cam-pend" id="cam-result">Evalúa los criterios para obtener resultado</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:6px;text-align:center;line-height:1.4;">Delirium confirmado: Criterios 1 + 2 + (3 ó 4) positivos · Evaluar c/6h</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== DELIRIUM ===== -->
+    <div class="page" id="p4">
+      <!-- PRE-DELIRIC CALCULADORA -->
+      <div class="card">
+        <div class="card-hd">PRE-DELIRIC — Calculadora interactiva de riesgo de delirium</div>
+        <div class="card-bd">
+          <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;line-height:1.5;">
+            Modelo validado internacionalmente. Evalúa <strong>10 factores</strong> disponibles dentro de las primeras 24h de ingreso a UCI. Completa todos los campos para obtener el riesgo.
+          </div>
+
+          <!-- 1. Edad -->
+          <div class="pd-item">
+            <div class="pd-label">1 · Edad</div>
+            <div class="pd-btn-group" id="pd-g0">
+              <button class="pd-btn" onclick="setPD(0,0)">≤ 44 años</button>
+              <button class="pd-btn" onclick="setPD(0,1)">45 – 59 años</button>
+              <button class="pd-btn" onclick="setPD(0,2)">60 – 74 años</button>
+              <button class="pd-btn" onclick="setPD(0,3)">≥ 75 años</button>
+            </div>
+          </div>
+
+          <!-- 2. APACHE-II -->
+          <div class="pd-item">
+            <div class="pd-label">2 · Puntaje APACHE-II</div>
+            <div class="pd-btn-group" id="pd-g1">
+              <button class="pd-btn" onclick="setPD(1,0)">≤ 9</button>
+              <button class="pd-btn" onclick="setPD(1,1)">10 – 19</button>
+              <button class="pd-btn" onclick="setPD(1,2)">20 – 29</button>
+              <button class="pd-btn" onclick="setPD(1,3)">≥ 30</button>
+            </div>
+          </div>
+
+          <!-- 3. Categoría de ingreso -->
+          <div class="pd-item">
+            <div class="pd-label">3 · Categoría de ingreso</div>
+            <div class="pd-btn-group" id="pd-g2" style="grid-template-columns:1fr 1fr;">
+              <button class="pd-btn" onclick="setPD(2,0)">Médico</button>
+              <button class="pd-btn" onclick="setPD(2,1)">Quirúrgico electivo</button>
+              <button class="pd-btn" onclick="setPD(2,2)">Quirúrgico urgente</button>
+              <button class="pd-btn" onclick="setPD(2,3)">Trauma</button>
+              <button class="pd-btn" onclick="setPD(2,4)" style="grid-column:1/-1;">Neurológico / Neuroquirúrgico</button>
+            </div>
+          </div>
+
+          <!-- 4. Coma -->
+          <div class="pd-item">
+            <div class="pd-label">4 · Coma en primeras 24h</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-bottom:5px;">GCS motor ≤ 2 o nivel conciencia deprimido por causa no farmacológica</div>
+            <div class="pd-btn-group pd-yn" id="pd-g3">
+              <button class="pd-btn" onclick="setPD(3,0)">No</button>
+              <button class="pd-btn" onclick="setPD(3,1)">Sí</button>
+            </div>
+          </div>
+
+          <!-- 5. Infección -->
+          <div class="pd-item">
+            <div class="pd-label">5 · Infección activa al ingreso</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-bottom:5px;">Sepsis, neumonía, ITU, herida infectada, u otra infección diagnosticada</div>
+            <div class="pd-btn-group pd-yn" id="pd-g4">
+              <button class="pd-btn" onclick="setPD(4,0)">No</button>
+              <button class="pd-btn" onclick="setPD(4,1)">Sí</button>
+            </div>
+          </div>
+
+          <!-- 6. Acidosis metabólica -->
+          <div class="pd-item">
+            <div class="pd-label">6 · Acidosis metabólica</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-bottom:5px;">pH &lt; 7.35 con bicarbonato &lt; 22 mEq/L o déficit de base &lt; −4</div>
+            <div class="pd-btn-group pd-yn" id="pd-g5">
+              <button class="pd-btn" onclick="setPD(5,0)">No</button>
+              <button class="pd-btn" onclick="setPD(5,1)">Sí</button>
+            </div>
+          </div>
+
+          <!-- 7. Sedación -->
+          <div class="pd-item">
+            <div class="pd-label">7 · Uso de sedantes en primeras 24h</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-bottom:5px;">Benzodiazepinas, propofol, dexmedetomidina u otro sedante</div>
+            <div class="pd-btn-group pd-yn" id="pd-g6">
+              <button class="pd-btn" onclick="setPD(6,0)">No</button>
+              <button class="pd-btn" onclick="setPD(6,1)">Sí</button>
+            </div>
+          </div>
+
+          <!-- 8. Morfina / Opioides -->
+          <div class="pd-item">
+            <div class="pd-label">8 · Dosis de morfina (equivalente) en 24h</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-bottom:5px;">Incluir fentanilo, morfina u otros opioides (convertir a equivalentes de morfina)</div>
+            <div class="pd-btn-group" id="pd-g7">
+              <button class="pd-btn" onclick="setPD(7,0)">Sin morfina</button>
+              <button class="pd-btn" onclick="setPD(7,1)">0.01 – 7.1 mg/día</button>
+              <button class="pd-btn" onclick="setPD(7,2)">7.2 – 18.6 mg/día</button>
+              <button class="pd-btn" onclick="setPD(7,3)">&gt; 18.6 mg/día</button>
+            </div>
+          </div>
+
+          <!-- 9. Urea -->
+          <div class="pd-item">
+            <div class="pd-label">9 · Nivel de urea sérica</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-bottom:5px;">Valor en primeras 24h de ingreso</div>
+            <div class="pd-btn-group" id="pd-g8">
+              <button class="pd-btn" onclick="setPD(8,0)">&lt; 7.5 mmol/L<br><span style="font-size:10px;opacity:.7;">&lt; 21 mg/dL</span></button>
+              <button class="pd-btn" onclick="setPD(8,1)">7.5 – 15 mmol/L<br><span style="font-size:10px;opacity:.7;">21 – 42 mg/dL</span></button>
+              <button class="pd-btn" onclick="setPD(8,2)">&gt; 15 mmol/L<br><span style="font-size:10px;opacity:.7;">&gt; 42 mg/dL</span></button>
+            </div>
+          </div>
+
+          <!-- 10. Ingreso urgente -->
+          <div class="pd-item">
+            <div class="pd-label">10 · Ingreso no planificado / urgente</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-bottom:5px;">Ingreso no programado desde urgencias, piso o traslado de emergencia</div>
+            <div class="pd-btn-group pd-yn" id="pd-g9">
+              <button class="pd-btn" onclick="setPD(9,0)">No (planificado)</button>
+              <button class="pd-btn" onclick="setPD(9,1)">Sí (urgente)</button>
+            </div>
+          </div>
+
+          <!-- RESULTADO -->
+          <div id="pd-result-wrap" style="margin-top:14px;">
+            <div id="pd-progress-bar" style="height:6px;background:var(--gray-border);border-radius:3px;margin-bottom:8px;overflow:hidden;">
+              <div id="pd-progress-fill" style="height:100%;width:0%;background:var(--gray);border-radius:3px;transition:width .3s,background .3s;"></div>
+            </div>
+            <div id="pd-counter" style="font-size:11px;color:var(--text-muted);text-align:center;margin-bottom:10px;">0 de 10 factores completados</div>
+            <div id="pd-result-box" style="background:var(--gray-light);border-radius:var(--radius-sm);padding:14px;border:1px solid var(--gray-border);text-align:center;">
+              <div style="font-size:11px;color:var(--text-muted);font-family:var(--mono);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;">Riesgo de delirium PRE-DELIRIC</div>
+              <div id="pd-pct" style="font-size:42px;font-weight:700;font-family:var(--mono);color:var(--gray);">—</div>
+              <div id="pd-category" style="font-size:13px;font-weight:600;margin-top:4px;color:var(--text-muted);">Completa los 10 factores</div>
+              <div id="pd-action" style="font-size:11px;color:var(--text-muted);margin-top:6px;line-height:1.5;display:none;"></div>
+            </div>
+            <div style="display:flex;gap:6px;margin-top:10px;">
+              <div style="flex:1;text-align:center;padding:6px;background:var(--green-light);border-radius:var(--radius-sm);">
+                <div style="font-size:10px;color:var(--green);font-weight:600;">Bajo riesgo</div>
+                <div style="font-size:11px;color:var(--green);">0 – 20%</div>
+              </div>
+              <div style="flex:1;text-align:center;padding:6px;background:var(--blue-light);border-radius:var(--radius-sm);">
+                <div style="font-size:10px;color:var(--blue-dark);font-weight:600;">Riesgo moderado</div>
+                <div style="font-size:11px;color:var(--blue-dark);">21 – 40%</div>
+              </div>
+              <div style="flex:1;text-align:center;padding:6px;background:var(--amber-light);border-radius:var(--radius-sm);">
+                <div style="font-size:10px;color:var(--amber);font-weight:600;">Riesgo alto</div>
+                <div style="font-size:11px;color:var(--amber);">41 – 60%</div>
+              </div>
+              <div style="flex:1;text-align:center;padding:6px;background:var(--red-light);border-radius:var(--radius-sm);">
+                <div style="font-size:10px;color:var(--red);font-weight:600;">Riesgo muy alto</div>
+                <div style="font-size:11px;color:var(--red);">&gt; 60%</div>
+              </div>
+            </div>
+          </div>
+          <button onclick="resetPD()" style="margin-top:10px;width:100%;padding:8px;border-radius:var(--radius-sm);background:var(--gray-light);border:1px solid var(--gray-border);font-size:12px;color:var(--text-muted);cursor:pointer;font-family:var(--font);">↺ Reiniciar evaluación</button>
+          <div style="margin-top:10px;font-size:10px;color:var(--text-muted);line-height:1.5;text-align:center;">
+            van den Boogaard et al. BMJ 2012 · Recalibración multicéntrica, Intensive Care Med 2014<br>
+            Solo para uso educativo y referencia clínica. No reemplaza el juicio clínico.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-hd">Detección continua — CAM-ICU</div>
+        <div class="card-bd">
+          <div class="irow"><span class="ilbl">Herramienta</span><span class="ival">CAM-ICU (ver sección Escalas)</span></div>
+          <div class="irow"><span class="ilbl">Registro</span><span class="ival">Hoja ingreso enfermería + ingreso médico</span></div>
+          <div class="irow"><span class="ilbl">Frecuencia</span><span class="ival">CAM-ICU c/6h · registrar en hoja enfermería</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd">Factores de riesgo modificables</div>
+        <div class="card-bd">
+          <div class="irow"><span class="ilbl">Evitar</span><span class="ival">BDZ · anticolinérgicos · sedación excesiva · polifarmacia</span></div>
+          <div class="irow"><span class="ilbl">Manejar</span><span class="ival">Dolor · privación sueño · inmovilización · déficit sensorial</span></div>
+          <div class="irow"><span class="ilbl">Prevenir</span><span class="ival">Abstinencia OH/drogas/sedoanalgesia prolongada</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd">Intervenciones no farmacológicas</div>
+        <div class="card-bd">
+          <div class="irow"><span class="ilbl">Área cognitiva</span><span class="ival">Reloj visible · luz natural · visitas flexibles · música · TV · fotos</span></div>
+          <div class="irow"><span class="ilbl">Sueño</span><span class="ival">Oscuridad nocturna · silencio · agrupar cuidados</span></div>
+          <div class="irow"><span class="ilbl">Movilidad</span><span class="ival">Movilización precoz · ejercicios pasivos y activos · limitar dispositivos</span></div>
+          <div class="irow"><span class="ilbl">Hipoactivo</span><span class="ival">Compañía continua · visita extendida · estimulación física</span></div>
+          <div class="irow"><span class="ilbl">Hiperactivo</span><span class="ival">Figura de autoridad · hablar calmado · llamar por nombre</span></div>
+          <div class="irow"><span class="ilbl">Sin respuesta</span><span class="ival">Contención física según protocolos vigentes</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd">Manejo farmacológico del delirium</div>
+        <div class="card-bd">
+          <div class="irow"><span class="ilbl">Haloperidol 1ª</span><span class="ival">Leve 0.5-2.5 mg · Mod 2-5 mg · Sev 10-20 mg IV/IM c/20-30 min</span></div>
+          <div class="irow"><span class="ilbl">Quetiapina</span><span class="ival">12.5 – 25 mg/día VO · máx 400 mg/día</span></div>
+          <div class="irow"><span class="ilbl">Olanzapina</span><span class="ival">2.5 – 15 mg/día VO</span></div>
+          <div class="irow"><span class="ilbl">Risperidona</span><span class="ival">0.25 – 0.5 mg/12h VO · máx 6 mg/día</span></div>
+          <div class="irow"><span class="ilbl">Dexmedetomidina</span><span class="ival">0.4 – 1.4 μg/kg/hr · inicio 0.7 μg/kg/hr</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd">Síndrome de abstinencia</div>
+        <div class="card-bd">
+          <div class="irow"><span class="ilbl">Evaluar si</span><span class="ival">Dosis altas BDZ/opioides/propofol · &gt;3 días · suspensión brusca</span></div>
+          <div class="irow"><span class="ilbl">Manejo</span><span class="ival">Reducción gradual · evitar combinaciones · Dexmedetomidina para destete</span></div>
+        </div>
+      </div>
+      <div class="alert alert-amber">⚠ El 30–40% de los casos de delirium son prevenibles con manejo adecuado de factores de riesgo modificables.</div>
+    </div>
+
+  </div><!-- /pages -->
+</div><!-- /shell -->
+
+<script>
+// TABS
+function tab(i){
+  document.querySelectorAll('.tabbar-btn').forEach((b,j)=>b.className='tabbar-btn'+(i===j?' on':''));
+  document.querySelectorAll('.page').forEach((p,j)=>{p.className='page'+(i===j?' on':'');});
+  if(i===1) initCalc();
+  if(i===2) flowRender();
+}
+
+// ===== CALCULADORA =====
+// Concentraciones reales del servicio UPC HFB
+// Fentanilo:       4000 μg / 100 mL  → 40 μg/mL
+// Propofol 2%:     2 g / 100 mL      → 20 mg/mL
+// Midazolam:       200 mg / 100 mL   → 2 mg/mL
+// Ketamina:        1000 mg / 1000 mL → 1 mg/mL = 1000 μg/mL
+// Dexmedetomidina: 400 μg / 100 mL   → 4 μg/mL
+const CONC = {
+  'Fentanilo':        { c: 40,   cu: 'μg/mL',  bu: 'μg/kg/hr',  factor: 1,  dilDesc: '4000 μg / 100 mL → 40 μg/mL' },
+  'Propofol':         { c: 20,   cu: 'mg/mL',  bu: 'mg/kg/hr',  factor: 1,  dilDesc: 'Propofol 2% / 50 cc → 20 mg/mL' },
+  'Midazolam':        { c: 2,    cu: 'mg/mL',  bu: 'mg/kg/hr',  factor: 1,  dilDesc: '200 mg / 100 mL → 2 mg/mL' },
+  'Dexmedetomidina':  { c: 4,    cu: 'μg/mL',  bu: 'μg/kg/hr',  factor: 1,  dilDesc: '400 μg / 100 mL → 4 μg/mL' },
+  'Ketamina':         { c: 1000, cu: 'μg/mL',  bu: 'μg/kg/min', factor: 60, dilDesc: '1 g / 1000 mL → 1 mg/mL (1000 μg/mL)' },
+};
+// factor = multiplicador para convertir unidad/min → unidad/hr cuando aplica
+
+const COMBOS=[
+  {name:'Fenta + Propofol',short:'F+P',drugs:[
+    {n:'Fentanilo',u:'μg/kg/hr',v:[0.6,1.2,1.8,1.8,2.4,2.4,3.0,3.0,3.6,3.6,3.6,3.6]},
+    {n:'Propofol',u:'mg/kg/hr',v:[0,0,0,0.5,0.5,1,1,1.5,1.5,2,2.5,3]}
+  ]},
+  {name:'Fenta + Midazolam',short:'F+M',drugs:[
+    {n:'Fentanilo',u:'μg/kg/hr',v:[0.6,1.2,1.8,1.8,2.4,2.4,3.0,3.0,3.6,3.6,3.6,3.6]},
+    {n:'Midazolam',u:'mg/kg/hr',v:[0,0,0,0.03,0.03,0.04,0.04,0.05,0.05,0.06,0.07,0.09]}
+  ]},
+  {name:'Fenta + Dexmed.',short:'F+D',drugs:[
+    {n:'Fentanilo',u:'μg/kg/hr',v:[0.6,1.2,1.8,1.8,2.4,2.4,3.0,3.0,3.6,3.6,3.6,3.6]},
+    {n:'Dexmedetomidina',u:'μg/kg/hr',v:[0,0,0.2,0.4,0.6,0.6,0.8,1,1.2,1.2,1.4,1.4]}
+  ]},
+  {name:'F + Propo + Mida',short:'F+P+M',drugs:[
+    {n:'Fentanilo',u:'μg/kg/hr',v:[0.6,1.2,1.8,1.8,2.4,2.4,3.0,3.0,3.6,3.6,3.6,3.6]},
+    {n:'Propofol',u:'mg/kg/hr',v:[0,0,0,0.5,0.5,1,1,1.5,1.5,2,2.5,3]},
+    {n:'Midazolam',u:'mg/kg/hr',v:[0,0,0,0.03,0.03,0.03,0.03,0.04,0.04,0.06,0.07,0.09]}
+  ]},
+  {name:'F + Propo + Keta',short:'F+P+K',drugs:[
+    {n:'Fentanilo',u:'μg/kg/hr',v:[0.6,1.2,1.8,1.8,2.4,2.4,3.0,3.0,3.6,3.6,3.6,3.6]},
+    {n:'Propofol',u:'mg/kg/hr',v:[0,0,0,0.5,0.5,1,1,1.5,1.5,2,2.5,3]},
+    {n:'Ketamina',u:'μg/kg/min',v:[0,0,0,0,4,4,8,10,10,15,20,30]}
+  ]},
+  {name:'F + Mida + Keta',short:'F+M+K',drugs:[
+    {n:'Fentanilo',u:'μg/kg/hr',v:[0.6,1.2,1.8,1.8,2.4,2.4,3.0,3.0,3.6,3.6,3.6,3.6]},
+    {n:'Midazolam',u:'mg/kg/hr',v:[0,0,0,0.03,0.03,0.03,0.03,0.04,0.04,0.06,0.07,0.09]},
+    {n:'Ketamina',u:'μg/kg/min',v:[0,0,0,0,4,6,8,10,10,15,20,30]}
+  ]}
+];
+let cc=0,calcInited=false;
+
+function initCalc(){
+  if(calcInited) return;
+  calcInited=true;
+  const pr=document.getElementById('combo-pills');
+  COMBOS.forEach((c,i)=>{
+    const d=document.createElement('div');
+    d.className='pill '+(i===0?'on':'off');
+    d.textContent=c.short;
+    d.title=c.name;
+    d.onclick=()=>{cc=i;pr.querySelectorAll('.pill').forEach((p,j)=>p.className='pill '+(j===i?'on':'off'));calc();};
+    pr.appendChild(d);
+  });
+  calc();
+}
+
+function calc(){
+  const peso=parseFloat(document.getElementById('peso').value)||70;
+  const esc=parseInt(document.getElementById('escalon').value)||4;
+  document.getElementById('esc-val').textContent=esc;
+  const sl=document.getElementById('escalon');
+  sl.style.setProperty('--pct',((esc-1)/11*100)+'%');
+  const combo=COMBOS[cc];
+  document.getElementById('calc-title').textContent='Dosis calculadas — '+combo.name;
+
+  let html='';
+  combo.drugs.forEach(d=>{
+    const rate=d.v[esc-1];
+    const activo=rate>0;
+    const ci=CONC[d.n];
+
+    if(!activo){
+      html+=`<div class="rcard off">
+        <div class="rcard-drug">${d.n}</div>
+        <div class="rcard-dose">—</div>
+        <div class="rcard-unit">${d.u}</div>
+        <div class="rcard-total">No activo en E${esc}</div>
+      </div>`;
+      return;
+    }
+
+    // dosis total por hora en la unidad base del fármaco
+    const totalPerHr = rate * peso; // ej: 1.8 μg/kg/hr × 70 kg = 126 μg/hr
+
+    // calcular mL/h según concentración de dilución
+    let mlH;
+    if(d.u === 'μg/kg/min'){
+      // convertir min→hr: rate μg/kg/min × 60 min × peso / concentración_μg_mL
+      mlH = (rate * 60 * peso) / ci.c;
+    } else {
+      // rate ya es /hr
+      mlH = totalPerHr / ci.c;
+    }
+
+    // formateo bonito
+    const totalStr = totalPerHr < 1
+      ? totalPerHr.toFixed(3).replace(/\.?0+$/,'')
+      : totalPerHr < 10
+        ? totalPerHr.toFixed(2).replace(/\.?0+$/,'')
+        : totalPerHr.toFixed(1).replace(/\.?0+$/,'');
+    const mlStr = mlH.toFixed(1);
+    const unitBase = d.u.replace('/kg','');
+
+    html+=`<div class="rcard">
+      <div class="rcard-drug">${d.n}</div>
+      <div class="rcard-dose">${rate}</div>
+      <div class="rcard-unit">${d.u}</div>
+      <div class="rcard-rows">
+        <div class="rcard-row-item">
+          <span class="rcard-row-lbl">Total/hr</span>
+          <span class="rcard-row-val">${totalStr} <span class="rcard-row-u">${unitBase}</span></span>
+        </div>
+        <div class="rcard-row-item rcard-row-ml">
+          <span class="rcard-row-lbl">Bomba</span>
+          <span class="rcard-row-val rcard-ml-val">${mlStr} <span class="rcard-row-u">mL/hr</span></span>
+        </div>
+        <div class="rcard-row-dil">${ci.dilDesc}</div>
+      </div>
+    </div>`;
+  });
+
+  document.getElementById('result-grid').innerHTML=html;
+  document.getElementById('calc-nota').textContent=esc===4?'✓ Escalón de inicio recomendado por el protocolo HFB.':esc<4?'Escalón por debajo del inicio recomendado (4). Verificar indicación médica.':'Escalón elevado. Verificar meta SAS y evaluación médica.';
+
+  // mini table
+  let th='<tr><th>Droga</th>';
+  for(let e=1;e<=12;e++) th+=`<th class="${e===4?'hl':''}${e===esc&&e!==4?' curr':e===esc?' curr':''}">${e}</th>`;
+  th+='</tr>';
+  let rows='';
+  combo.drugs.forEach(d=>{
+    rows+=`<tr><td>${d.n}</td>`;
+    d.v.forEach((v,j)=>{
+      const e=j+1;
+      rows+=`<td class="${e===4&&e!==esc?'hl':''}${e===esc?'curr':''}">${v||'—'}</td>`;
+    });
+    rows+='</tr>';
+  });
+  document.getElementById('esc-table-wrap').innerHTML=`<div class="etable-wrap"><table class="et">${th}${rows}</table></div>`;
+}
+
+// ===== FLUJOGRAMA =====
+const FLOW=[
+  {id:0,type:'dec',text:'¿El paciente requiere sedación?',opts:[{t:'Sí — definir meta SAS',s:1},{t:'No — sin sedación',s:10}]},
+  {id:1,type:'act',text:'Definir meta SAS con equipo médico. Registrar en hoja de indicaciones diarias.',opts:[{t:'Continuar',s:2}]},
+  {id:2,type:'dec',text:'¿Cuál es la meta SAS indicada por el médico?',opts:[{t:'SAS 1-2 (sedación profunda)',s:3},{t:'SAS 3-4 (sedación superficial)',s:5}]},
+  {id:3,type:'red',text:'Meta SAS 1-2: Iniciar fenta+propo o fenta+mida en escalón 9. Alcanzar meta en primeras 6-12h. Monitorear BIS c/12h. Reevaluar meta diariamente.',opts:[{t:'¿Logra meta SAS 1-2?',s:4}]},
+  {id:4,type:'dec',text:'¿Logra meta SAS 1-2?',opts:[{t:'Sí → mantener y reevaluar',s:7},{t:'No → subir escalón',s:8}]},
+  {id:5,type:'green',text:'Meta SAS 3-4: Iniciar fenta+propo o fenta+dex en escalón 4. Suspender sedación 2h cada mañana para evaluación. Evitar BDZ en período de evaluación.',opts:[{t:'¿Logra meta SAS 3-4?',s:6}]},
+  {id:6,type:'dec',text:'¿Logra meta SAS 3-4?',opts:[{t:'Sí → continuar destete VM',s:7},{t:'No → SAS >5',s:9}]},
+  {id:7,type:'green',text:'✓ Meta alcanzada. Reevaluar diariamente. Reducir escalón gradualmente. Registrar en hoja enfermería c/4h.',opts:[]},
+  {id:8,type:'amber',text:'Subir escalón. Si persiste sin respuesta al escalar hasta 12 → avisar médico para agregar 3er fármaco o BNM como último recurso.',opts:[]},
+  {id:9,type:'amber',text:'SAS 5-7: Evaluar BPS (dolor) y CAM-ICU (delirium). Dolor leve → analgesia no opioide. Dolor mod-grav → bolo fentanilo 25-100 μg. Agitación → subir escalón + bolos. Delirium → protocolo delirium.',opts:[]},
+  {id:10,type:'green',text:'Sin sedación: aplicar medidas de prevención del delirium. CAM-ICU c/6h. Movilización precoz. Orientación al entorno. Control del sueño.',opts:[]},
+];
+let fstate=0;
+
+function flowRender(){
+  const n=FLOW[fstate];
+  let cls='fnode fnode-act';
+  if(n.type==='dec') cls='fnode fnode-dec';
+  if(n.type==='red') cls='fnode fnode-red';
+  if(n.type==='green') cls='fnode fnode-green';
+  if(n.type==='amber') cls='fnode fnode-amber';
+  let html=`<div class="${cls}">${n.text}</div>`;
+  if(n.opts.length===2){
+    html+=`<div class="fbtn-row">
+      <button class="fbtn fbtn-si" onclick="flowGo(${n.opts[0].s})">${n.opts[0].t}</button>
+      <button class="fbtn fbtn-no" onclick="flowGo(${n.opts[1].s})">${n.opts[1].t}</button>
+    </div>`;
+  } else if(n.opts.length===1){
+    html+=`<div style="margin-top:8px;"><button class="fbtn fbtn-cont" onclick="flowGo(${n.opts[0].s})">${n.opts[0].t} →</button></div>`;
+  } else {
+    html+=`<div style="margin-top:8px;font-size:12px;color:var(--text-muted);text-align:center;">Fin de este camino. Reinicia para evaluar otro escenario.</div>`;
+  }
+  document.getElementById('flow-body').innerHTML=html;
+}
+function flowGo(s){fstate=s;flowRender();}
+function flowReset(){fstate=0;flowRender();}
+
+// ===== PRE-DELIRIC =====
+// Coeficientes del modelo recalibrado (van den Boogaard et al, 2014)
+// Intercept: -4.0369
+const PD_INTERCEPT = -4.0369;
+const PD_COEF = {
+  // edad: ≤44=0, 45-59=0.367, 60-74=0.537, ≥75=0.889
+  age:   [0, 0.367, 0.537, 0.889],
+  // APACHE-II: ≤9=0, 10-19=0.541, 20-29=0.857, ≥30=1.347
+  apache:[0, 0.541, 0.857, 1.347],
+  // categoría ingreso: médico=0.836, qx electivo=0, qx urgente=0.836, trauma=0.836, neuro=1.081
+  cat:   [0.836, 0, 0.836, 0.836, 1.081],
+  // coma: no=0, sí=1.349
+  coma:  [0, 1.349],
+  // infección: no=0, sí=0.537
+  infx:  [0, 0.537],
+  // acidosis metabólica: no=0, sí=0.624
+  acid:  [0, 0.624],
+  // sedación: no=0, sí=0.609
+  sed:   [0, 0.609],
+  // morfina: sin=0, 0.01-7.1=0.300, 7.2-18.6=0.563, >18.6=0.849
+  morph: [0, 0.300, 0.563, 0.849],
+  // urea: <7.5=0, 7.5-15=0.420, >15=0.900
+  urea:  [0, 0.420, 0.900],
+  // ingreso urgente: no=0, sí=0.544
+  urg:   [0, 0.544]
+};
+
+const pdVals = new Array(10).fill(null);
+const PD_KEYS = ['age','apache','cat','coma','infx','acid','sed','morph','urea','urg'];
+
+function setPD(g, val) {
+  pdVals[g] = val;
+  const btns = document.getElementById('pd-g' + g).querySelectorAll('.pd-btn');
+  btns.forEach((b, i) => b.className = 'pd-btn' + (i === val ? ' sel' : ''));
+  updatePD();
+}
+
+function updatePD() {
+  const filled = pdVals.filter(v => v !== null).length;
+  document.getElementById('pd-counter').textContent = filled + ' de 10 factores completados';
+  const fill = document.getElementById('pd-progress-fill');
+  fill.style.width = (filled / 10 * 100) + '%';
+  fill.style.background = filled < 10 ? 'var(--blue)' : 'var(--green)';
+
+  const pctEl = document.getElementById('pd-pct');
+  const catEl = document.getElementById('pd-category');
+  const actEl = document.getElementById('pd-action');
+  const box   = document.getElementById('pd-result-box');
+
+  if (filled < 10) {
+    pctEl.textContent = '—';
+    pctEl.style.color = 'var(--gray)';
+    catEl.textContent = 'Completa los 10 factores';
+    catEl.style.color = 'var(--text-muted)';
+    box.style.background = 'var(--gray-light)';
+    box.style.borderColor = 'var(--gray-border)';
+    actEl.style.display = 'none';
+    return;
+  }
+
+  // Calcular logit
+  let logit = PD_INTERCEPT;
+  PD_KEYS.forEach((k, i) => { logit += PD_COEF[k][pdVals[i]]; });
+  const prob = 1 / (1 + Math.exp(-logit));
+  const pct = Math.round(prob * 100);
+
+  pctEl.textContent = pct + '%';
+  actEl.style.display = 'block';
+
+  if (pct <= 20) {
+    pctEl.style.color = 'var(--green)';
+    box.style.background = 'var(--green-light)';
+    box.style.borderColor = 'var(--green)';
+    catEl.textContent = 'Riesgo bajo';
+    catEl.style.color = 'var(--green)';
+    actEl.style.color = 'var(--green)';
+    actEl.textContent = 'Medidas estándar de prevención. Monitorizar con CAM-ICU c/6h.';
+  } else if (pct <= 40) {
+    pctEl.style.color = 'var(--blue)';
+    box.style.background = 'var(--blue-light)';
+    box.style.borderColor = 'var(--blue)';
+    catEl.textContent = 'Riesgo moderado';
+    catEl.style.color = 'var(--blue-dark)';
+    actEl.style.color = 'var(--blue-dark)';
+    actEl.textContent = 'Iniciar intervenciones no farmacológicas. Optimizar analgesia y sedación. CAM-ICU c/6h.';
+  } else if (pct <= 60) {
+    pctEl.style.color = 'var(--amber)';
+    box.style.background = 'var(--amber-light)';
+    box.style.borderColor = 'var(--amber)';
+    catEl.textContent = 'Riesgo alto';
+    catEl.style.color = 'var(--amber)';
+    actEl.style.color = 'var(--amber)';
+    actEl.textContent = 'Aplicar todas las medidas preventivas no farmacológicas. Evaluar factores modificables. CAM-ICU c/4h. Notificar al médico.';
+  } else {
+    pctEl.style.color = 'var(--red)';
+    box.style.background = 'var(--red-light)';
+    box.style.borderColor = 'var(--red)';
+    catEl.textContent = 'Riesgo muy alto';
+    catEl.style.color = 'var(--red)';
+    actEl.style.color = 'var(--red)';
+    actEl.textContent = '⚠ Intervención prioritaria. Implementar inmediatamente el protocolo de prevención completo. Evaluar uso de dexmedetomidina. CAM-ICU c/4h. Notificar médico.';
+  }
+}
+
+function resetPD() {
+  for (let i = 0; i < 10; i++) {
+    pdVals[i] = null;
+    document.getElementById('pd-g' + i).querySelectorAll('.pd-btn').forEach(b => b.className = 'pd-btn');
+  }
+  updatePD();
+}
+
+// ===== BPS INTERACTIVO =====
+const bpsVals = [0, 0, 0];
+
+function setBPS(grupo, val) {
+  bpsVals[grupo] = val;
+  const btns = document.getElementById('bps-g' + grupo).querySelectorAll('.bps-btn');
+  btns.forEach((b, i) => b.className = 'bps-btn' + (i + 1 === val ? ' sel' : ''));
+  updateBPS();
+}
+
+function updateBPS() {
+  const total = bpsVals[0] + bpsVals[1] + bpsVals[2];
+  const filled = bpsVals.filter(v => v > 0).length;
+  const scoreEl = document.getElementById('bps-score-num');
+  const subtEl = document.getElementById('bps-subtotals');
+  const interp = document.getElementById('bps-interp');
+  const box = document.querySelector('#bps-result-box > div:first-child');
+
+  const fmt = v => v > 0 ? v : '—';
+  subtEl.textContent = 'Expresión: ' + fmt(bpsVals[0]) + ' · Miembros: ' + fmt(bpsVals[1]) + ' · VM: ' + fmt(bpsVals[2]);
+
+  if (filled === 0) {
+    scoreEl.textContent = '—';
+    scoreEl.style.color = 'var(--gray)';
+    box.style.background = 'var(--gray-light)';
+    box.style.borderColor = 'var(--gray-border)';
+    interp.style.display = 'none';
+    return;
+  }
+
+  scoreEl.textContent = filled === 3 ? total : '...';
+
+  if (filled < 3) {
+    scoreEl.style.color = 'var(--amber)';
+    box.style.background = 'var(--amber-light)';
+    box.style.borderColor = 'var(--amber)';
+    interp.style.display = 'none';
+    return;
+  }
+
+  // Todos 3 ítems seleccionados
+  interp.style.display = 'block';
+  if (total === 3) {
+    scoreEl.style.color = 'var(--green)';
+    box.style.background = 'var(--green-light)';
+    box.style.borderColor = 'var(--green)';
+    interp.style.background = 'var(--green-light)';
+    interp.style.color = 'var(--green)';
+    interp.textContent = '✓ BPS 3 — Sin dolor';
+  } else if (total <= 5) {
+    scoreEl.style.color = 'var(--green)';
+    box.style.background = 'var(--green-light)';
+    box.style.borderColor = 'var(--green)';
+    interp.style.background = 'var(--green-light)';
+    interp.style.color = 'var(--green)';
+    interp.textContent = '✓ BPS ' + total + ' — Dolor leve · Dentro de meta (< 6)';
+  } else if (total === 6 || total === 7) {
+    scoreEl.style.color = 'var(--amber)';
+    box.style.background = 'var(--amber-light)';
+    box.style.borderColor = 'var(--amber)';
+    interp.style.background = 'var(--amber-light)';
+    interp.style.color = 'var(--amber)';
+    interp.textContent = '⚠ BPS ' + total + ' — Dolor significativo · Requiere manejo analgésico';
+  } else {
+    scoreEl.style.color = 'var(--red)';
+    box.style.background = 'var(--red-light)';
+    box.style.borderColor = 'var(--red)';
+    interp.style.background = 'var(--red-light)';
+    interp.style.color = 'var(--red)';
+    interp.textContent = '✖ BPS ' + total + ' — Dolor severo · Intervención urgente requerida';
+  }
+}
+
+function resetBPS() {
+  bpsVals[0] = 0; bpsVals[1] = 0; bpsVals[2] = 0;
+  [0, 1, 2].forEach(g => {
+    document.getElementById('bps-g' + g).querySelectorAll('.bps-btn').forEach(b => b.className = 'bps-btn');
+  });
+  updateBPS();
+}
+
+// ===== DILUCIONES =====
+function toggleDil(id, btn){
+  const body=document.getElementById(id);
+  const chev=btn.querySelector('.dil-chev');
+  const isOpen=body.classList.contains('open');
+  body.classList.toggle('open');
+  chev.textContent=isOpen?'▶':'▼';
+}
+
+// ===== CAM-ICU EXPANDIBLE =====
+const camS=[true,false,false,false];
+const camExpanded=[false,false,false,false];
+
+function expandCrit(i){
+  camExpanded[i]=!camExpanded[i];
+  const det=document.getElementById('det'+i);
+  const chev=document.getElementById('chev'+i);
+  det.style.display=camExpanded[i]?'block':'none';
+  chev.textContent=camExpanded[i]?'▼':'▶';
+}
+
+function setCam(i,val){
+  camS[i]=val;
+  const cb=document.getElementById('cb'+i);
+  cb.className='cam-cb'+(val?' on':'');
+  cb.textContent=val?'✓':'';
+  updateCamResult();
+}
+
+function updateCamResult(){
+  const r=document.getElementById('cam-result');
+  const allEval=camS.some(v=>v);
+  if(camS[0]&&camS[1]&&(camS[2]||camS[3])){
+    r.className='cam-result cam-pos';
+    r.textContent='⚠ CAM-ICU POSITIVO — Delirium presente. Iniciar manejo.';
+  } else if(!camS[0]&&!camS[1]&&!camS[2]&&!camS[3]){
+    r.className='cam-result cam-pend';
+    r.textContent='Evalúa los criterios para obtener resultado';
+  } else {
+    r.className='cam-result cam-neg';
+    r.textContent='✓ CAM-ICU negativo — Sin delirium confirmado';
+  }
+}
+
+// Inicializar: criterio 1 activo por defecto
+updateCamResult();
+
+// Service Worker para modo offline
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
+</script>
+</body>
+</html>
